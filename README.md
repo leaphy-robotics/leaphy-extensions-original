@@ -1,2 +1,2 @@
-# leaphy-robot-libraries
-Contains the source code for the Leaphy Robot blocks
+# leaphy-extensions-original
+Contains the source code for the Leaphy Original extensions library
