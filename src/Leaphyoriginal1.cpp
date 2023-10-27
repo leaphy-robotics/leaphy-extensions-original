@@ -5,6 +5,17 @@
 
 #include "Leaphyoriginal1.h"
 
+
+/* Allow motor pins to be overriden for different robot types */
+void setMotorPins(int m1_pwm, int m1_dir, int m2_pwm, int m2_dir)
+{
+    motor_pins.m1_pwm = m1_pwm;
+    motor_pins.m1_dir = m1_dir;
+    motor_pins.m2_pwm = m2_pwm;
+    motor_pins.m2_dir = m2_dir;
+}
+
+
 float getDistance()
 {
     float duration, distance;
@@ -21,7 +32,6 @@ float getDistance()
     if(distance == 0 ){
       distance = distance + 1313;
     }
-
 
     return distance;
 }
@@ -41,10 +51,10 @@ void setTone(int fpTone, int fpBeat)
 void setMotor(int fpMotor, int fpSpeed)
 {
     /* Select right pins for the given motor */
-    uint8_t pinDIR = fpMotor == MOTOR_LEFT  ? M1_DIR :
-                     fpMotor == MOTOR_RIGHT ? M2_DIR : -1;
-    uint8_t pinPWM = fpMotor == MOTOR_LEFT  ? M1_PWM :
-                     fpMotor == MOTOR_RIGHT ? M2_PWM : -1;
+    uint8_t pinDIR = fpMotor == MOTOR_LEFT  ? motor_pins.m1_dir :
+                     fpMotor == MOTOR_RIGHT ? motor_pins.m2_dir : -1;
+    uint8_t pinPWM = fpMotor == MOTOR_LEFT  ? motor_pins.m1_pwm :
+                     fpMotor == MOTOR_RIGHT ? motor_pins.m2_pwm : -1;
     /* Set DIR and PWM pins */
     pinMode(pinDIR, OUTPUT);
     pinMode(pinPWM, OUTPUT);

@@ -26,10 +26,6 @@
 #define RIGHT           (4)
 
 // PIN definitions for Fundumoto L298P motor shield with built in buzzer
-#define M1_PWM          (10)    // Motor A PWM
-#define M1_DIR          (12)    // Motor A direction
-#define M2_PWM          (11)    // Motor B PWM
-#define M2_DIR          (13)    // Motor B direction
 #define TONE_PIN        (4)     // DIG-OUT
 #define LED1_RED        (6)     // PWM-OUT
 #define LED1_GREEN      (5)     // PWM-OUT
@@ -39,7 +35,15 @@
 #define US_ECHO         (8)     // DIG-IN/OUT
 #define US_TRIG         (7)     // DIG-OUT
 
-float getDistance(void);
+struct {
+    int m1_pwm = 10;
+    int m1_dir = 12;
+    int m2_pwm = 11;
+    int m2_dir = 13;
+} motor_pins;
+
+void setMotorPins(int m1_pwm, int m1_dir, int m2_pwm, int m2_dir);
+float getDistance();
 int getLineFollower(int fpSide);
 void setTone( int fpTone, int fpBeat);
 void setMotor(int fpMotor, int fpSpeed);
