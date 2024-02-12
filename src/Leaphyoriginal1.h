@@ -15,6 +15,7 @@
 #include <util/delay.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <List.hpp>
 
 #define MOTOR_LEFT      (9)     // M1
 #define MOTOR_RIGHT     (10)    // M2
@@ -42,6 +43,8 @@ struct {
     int m2_dir = 13;
 } motor_pins;
 
+List<int> i2cChannelStack;
+
 void setMotorPins(int m1_pwm, int m1_dir, int m2_pwm, int m2_dir);
 float getDistance();
 int getLineFollower(int fpSide);
@@ -49,5 +52,8 @@ void setTone( int fpTone, int fpBeat);
 void setMotor(int fpMotor, int fpSpeed);
 void moveMotors(int fpDirection, int fpSpeed);
 void setLed(int fpRed, int fpGreen, int fpBlue);
+void i2cSelectChannel(uint8_t channel, bool push=TRUE)
+void i2cRestoreChannel();
+uint8_t i2cGetChannel();
 
 #endif
