@@ -32,8 +32,6 @@
 #define LED1_BLUE       (3)     // PWM-OUT
 #define LINE_LEFT       (16)    // DIG-IN       A2 tinkerkit In2
 #define LINE_RIGHT      (17)    // DIG-IN       A3 tinkerkit In3
-#define US_ECHO         (8)     // DIG-IN/OUT
-#define US_TRIG         (7)     // DIG-OUT
 
 struct {
     int m1_pwm = 10;
@@ -42,7 +40,13 @@ struct {
     int m2_dir = 13;
 } motor_pins;
 
+struct {
+    int echo = 8;
+    int trig = 7;
+} us_pins;
+
 void setMotorPins(int m1_pwm, int m1_dir, int m2_pwm, int m2_dir);
+void setUSPins(int echo, int trig);
 float getDistance();
 int getLineFollower(int fpSide);
 void setTone( int fpTone, int fpBeat);
