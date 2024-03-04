@@ -16,18 +16,25 @@ void setMotorPins(int m1_pwm, int m1_dir, int m2_pwm, int m2_dir)
 }
 
 
+void setUSPins(int echo, int trig) 
+{
+    us_pins.echo = echo;
+    us_pins.trig = trig;
+}
+
+
 float getDistance()
 {
     float duration, distance;
     int tries = 0;
 
-    pinMode(US_TRIG, OUTPUT);
-    digitalWrite(US_TRIG, LOW);
+    pinMode(us_pins.trig, OUTPUT);
+    digitalWrite(us_pins.trig, LOW);
     delayMicroseconds(2);
-    digitalWrite(US_TRIG, HIGH);
+    digitalWrite(us_pins.trig, HIGH);
     delayMicroseconds(10);
-    digitalWrite(US_TRIG, LOW);
-        duration = pulseIn(US_ECHO, HIGH, 30000);
+    digitalWrite(us_pins.trig, LOW);
+        duration = pulseIn(us_pins.echo, HIGH, 30000);
         distance = 0.034 * duration / 2;
     if(distance == 0 ){
       distance = distance + 1313;
