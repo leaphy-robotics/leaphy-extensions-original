@@ -93,23 +93,3 @@ void setLed(int fpRed, int fpGreen, int fpBlue)
     analogWrite(LED1_GREEN, fpGreen);
     analogWrite(LED1_BLUE, fpBlue);
 }
-
-void i2cSelectChannel(uint8_t channel, bool push=TRUE) {
-    if (push) i2cChannelStack.addLast(channel);
-    if(channel <= 7) channel = (1 << channel);
-    Wire.beginTransmission(0x70);
-    Wire.write(channel);
-    Wire.endTransmission();
-}
-
-void i2cRestoreChannel() {
-    i2cChannelStack.removeLast();
-    uint8_t channel = i2cChannelStack.get(i2cChannelStack.size() - 1);
-    i2cSelectChannel(channel, FALSE);
-}
-
-uint8_t i2cGetChannel() {
-    uint8_t channel = i2cChannelStack.get(i2cChannelStack.size() - 1);
-    if (channel > 7) channel = 0;
-    return channel;
-}
